@@ -5,8 +5,8 @@ import { Redirect } from "react-router-dom";
 import { signin, authenticate, isAuthenticated } from "../auth/helper";
 const Signin = () => {
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: "welcome@oyo.com",
+    password: "12345",
     error: "",
     loading: false,
     didRedirect: false,
@@ -106,9 +106,11 @@ const Signin = () => {
                 />
               </div>
             </div>
-            <button onClick={onSubmit} className="btn btn-success btn-block">
-              submit
-            </button>
+            <div className="col-10 offset-md-2">
+              <button onClick={onSubmit} className="btn btn-success form-control col-11">
+                submit
+              </button>
+            </div>
           </form>
         </div>
       </div>
