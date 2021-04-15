@@ -46,6 +46,37 @@ if (process.env.NODE_ENV === "production") {
       res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
     });
   }
+  try {
+    // keepAlive.js
+    const fetch = require('node-fetch');
+  
+    // globals
+    const interval = 25 * 60 * 1000; // interval in milliseconds - {25mins x 60s x 1000}ms
+    const url = "https://e-comstore.herokuapp.com/api/products"
+  
+    function wake() {
+      try {
+  
+        const handler = setInterval(() => {
+  
+          fetch(url)
+            .then(res => console.log(`response-ok: ${res.ok}, status: ${res.status}`))
+        }, interval);
+  
+      } catch (err) {
+        console.error('Error occured: retrying...')
+        clearInterval(handler);
+        return setTimeout(() => wake(), 10000);
+      };
+  
+    };
+  
+  
+    wake();
+  
+  } catch (err) {
+    console.log(err)
+  }
 //Starting a server
 app.listen(port, () => {
     console.log(`app is running at ${port}`);

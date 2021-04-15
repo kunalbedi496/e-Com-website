@@ -1,54 +1,77 @@
-import React, { useState } from "react";
-import Base from "../core/Base";
-import { signup } from "../auth/helper";
-
+import { isAuthenticated } from "../auth/helper";
+import React, { useEffect, useState } from 'react'
+import Base from '../core/Base'
+import { updateUser, getUser } from "./helper/userapicalls";
 import { Link } from "react-router-dom";
+const UpdateUser = () => {
 
-const Signup = () => {
+    const { user, token } = isAuthenticated();
+    const backBtn = () => (
+        <div className="mt-5">
+            <Link className="btn btn-sm btn-warning mb-3 mt-2" to="/user/dashboard">
+                <span className="fa fa-chevron-left" aria-hidden="true"></span> Back to
+                admin dashbard
+            </Link>
+        </div>
+
+    )
+
     const [values, setValues] = useState({
+        id: "",
         name: "",
         email: "",
         password: "",
         error: "",
-        success: false
+        success: false,
     });
     const { name, email, password, error, success } = values;
+    const preload = () => {
+        getUser(user, token)
+            .then((data) => {
+                // console.log(data);
+                if (data.error) {
+                    setValues({ ...values, error: data.error });
+                } else {
+                    setValues({ ...values, id: data._id, name: data.name, email: data.email })
 
+                }
+            })
+            .catch(e => console.log(e))
+    }
+
+    useEffect(() => {
+        preload();
+
+    }, [])
     const handleChange = (name) => (event) => {
         setValues({ ...values, error: false, [name]: event.target.value });
     };
     const onSubmit = (event) => {
         event.preventDefault();
         setValues({ ...values, error: false });
-        signup({ name, email, password })
+        updateUser(values, token)
             .then((data) => {
+                // console.log(data);
                 if (data.error) {
                     setValues({ ...values, error: data.error, success: false });
                 } else {
-                    setValues({
-                        ...values,
-                        name: "",
-                        email: "",
-                        password: "",
-                        error: "",
-                        success: true
-                    });
+                    setValues({ ...values, success: true })
                 }
             })
-            .catch(console.log("error in signup"));
+            .catch(console.log("error in update"));
     };
 
     const SuccessMessage = () => {
         return (
             <div className="row">
-                <div className="col-md-6 offset-sm-3 text-left">
+                <div className="col-md-8 offset-sm-2 text-left">
                     <div
                         className="alert alert-success"
                         style={{ display: success ? "" : "none" }}
                     >
-                        {" "}
-                        New account was created successfully
-                        <Link to="/signin">Login here</Link>
+                        {console.log(success)}
+                Credentials  updated successfully
+                <Link to="/user/dashboard">Go to Dashboard</Link>
                     </div>
                 </div>
             </div>
@@ -69,16 +92,16 @@ const Signup = () => {
         );
     };
 
-    const signUpForm = () => {
+    const updateForm = () => {
         return (
-            <div className="row">
-                <div className="col-md-6 offset-sm-3">
-                    <form action="" >
+            <div className="row d-flex align-content-center">
+                <div className="col-md-10 offset-1 text-center">
+                    <form className="bg-white p-5 mb-5" action="">
                         <div className="form-group">
                             <div className="row">
-                                <label className="col-md-3 offset-md-2 mt-auto">
+                                <label className="text-dark col-md-3 offset-md-2 mt-auto">
                                     Name :
-                                </label>
+                    </label>
                                 <input
                                     className="col-md-6 form-control"
                                     type="text"
@@ -91,9 +114,9 @@ const Signup = () => {
                         </div>
                         <div className="form-group">
                             <div className="row">
-                                <label className="col-md-3 offset-md-2 mt-auto">
+                                <label className="text-dark col-md-3 offset-md-2 mt-auto">
                                     Email :
-                                </label>
+                    </label>
                                 <input
                                     className="col-md-6 form-control"
                                     type="email"
@@ -106,9 +129,9 @@ const Signup = () => {
                         </div>
                         <div className="form-group">
                             <div className="row">
-                                <label className="col-md-3 offset-md-2 mt-auto">
+                                <label className="text-dark col-md-3 offset-md-2 mt-auto">
                                     Password :
-                                </label>
+                    </label>
                                 <input
                                     className="col-md-6 form-control"
                                     type="password"
@@ -120,26 +143,27 @@ const Signup = () => {
                             </div>
                         </div>
                         <div className="col-10 offset-md-2">
-                            <button
-                                onClick={onSubmit}
-                                className="btn btn-info form-control col-11"
-                            >
+                            <button onClick={onSubmit} className="btn btn-info form-control col-11">
                                 Submit
-                            </button>
+                  </button>
                         </div>
                     </form>
                 </div>
             </div>
         );
     };
-    return (
-        <Base title="Sign Up" description="A page for user to Signup!!">
-            {SuccessMessage()}
-            {errorMessage()}
-            {signUpForm()}
-            {/* <p className=" text-center">{JSON.stringify(values)}</p> */}
-        </Base>
-    );
-};
 
-export default Signup;
+
+
+
+    return (
+        <Base title="Update Profile" description="" className="container bg-info">
+            {errorMessage()}
+            {SuccessMessage()}
+            {backBtn()}
+            {updateForm()}
+        </Base>
+    )
+}
+
+export default UpdateUser;

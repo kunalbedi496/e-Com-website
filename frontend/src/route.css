@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Karma&family=Patrick+Hand&family=Ubuntu+Mono:ital@1&display=swap");
+
+/* 
+font-family: 'Karma', serif; //main
+font-family: 'Patrick Hand', cursive; //heading
+font-family: 'Ubuntu Mono', monospace;//regular
+ */
+
+.Heading1 {
+  font-family: "Patrick Hand", cursive;
+  font-size: 4em;
+  margin-top: 5rem;
+}
+.cmain {
+  border-radius: 20px;
+}
+
+.heading2 {
+  font-family: "Patrick Hand", cursive;
+  font-size: 34px;
+  color: black;
+}
+.heading2:hover {
+  font-family: "Patrick Hand", cursive;
+  font-size: 34px;
+  color: black;
+  text-decoration: none;
+}
+body{
+  background-image: url(./wave.svg);
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  }
+

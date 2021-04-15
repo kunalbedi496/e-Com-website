@@ -40,14 +40,14 @@ const ManageCategories = () => {
             </Link>
             <div className="row">
                 <div className="col-12">
-                    <h2 className="text-center text-white my-3"> Categories</h2>
+                    <h2 className="text-center  my-3"> Categories</h2>
                     {categories.map((category, index) => {
                         return (
                             <div>
                                 <div className="row text-center mb-2 ">
                                     <div className="col-4">
                                         <h3
-                                            className="text-white text-left"
+                                            className=" text-left"
                                             key={index}
                                         >
                                             {" "}

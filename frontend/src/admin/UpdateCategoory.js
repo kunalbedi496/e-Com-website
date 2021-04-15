@@ -30,7 +30,7 @@ const UpdateCategoory = ({ match }) => {
         <div className="mt-5">
             <Link className="btn btn-sm btn-warning mb-3" to="/admin/dashboard">
                 <span className="fa fa-chevron-left" aria-hidden="true"></span>{" "}
-                back to admin dashbard
+                Back to Admin Dashbard
             </Link>
         </div>
     );
@@ -63,7 +63,7 @@ const UpdateCategoory = ({ match }) => {
     const successMessage = () => {
         if (success) {
             return (
-                <h4 className="text-success">category created successfully</h4>
+                <h4 className="text-success">Category created successfully</h4>
             );
         }
     };
@@ -77,7 +77,7 @@ const UpdateCategoory = ({ match }) => {
     const myCategoryForm = () => (
         <form action="">
             <div className="form-group">
-                <p className="lead">enter the category</p>
+                <p className="lead">Enter the category</p>
                 <input
                     type="text"
                     className="form-control my-3"

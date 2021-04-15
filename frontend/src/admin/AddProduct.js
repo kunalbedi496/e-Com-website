@@ -177,12 +177,12 @@ const AddProduct = () => {
             description="welcome to product creation section"
             className="container bg-info p-4"
         >
-            <h1 className="text-white">Add product here</h1>
+            <h1 className="">Add product here</h1>
 
-            <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
+            <Link to="/admin/dashboard" className="btn btn-md btn-light mb-3">
                 Admin home
             </Link>
-            <div className="row bg-dark text-white rounded">
+            <div className="row bg-light  rounded">
                 <div className="col-md-8 offset-md-2">
                     {successMessaasge()}
                     {erorrMessage()}

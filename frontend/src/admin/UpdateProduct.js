@@ -113,7 +113,7 @@ const UpdateProduct = ({ match }) => {
             className="alert alert-success mt-3"
             style={{ display: createdProduct ? "" : "none" }}
         >
-            <h4>{createdProduct} updated successfully</h4>
+            <h4>{createdProduct} Updated successfully</h4>
         </div>
     );
     const erorrMessage = () => {
@@ -192,7 +192,7 @@ const UpdateProduct = ({ match }) => {
                 onClick={onUpdate}
                 className="btn btn-outline-success mb-3"
             >
-                update product
+                Update product
             </button>
         </form>
     );
@@ -206,7 +206,7 @@ const UpdateProduct = ({ match }) => {
             <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
                 Admin home
             </Link>
-            <div className="row bg-dark text-white rounded">
+            <div className="row bg-dark  rounded">
                 <div className="col-md-8 offset-md-2">
                     {successMessaasge()}
                     {erorrMessage()}
