@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === "production") {
     const fetch = require('node-fetch');
   
     // globals
-    const interval = 25 * 60 * 1000; // interval in milliseconds - {25mins x 60s x 1000}ms
+    const interval = 720 * 60 * 1000; // interval in milliseconds - {720mins x 60s x 1000}ms
     const url = "https://e-comstore.herokuapp.com/api/products"
   
     function wake() {
